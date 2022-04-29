@@ -1,0 +1,24 @@
+{
+  "name": "p7_foulet_code",
+  "version": "1.0.0",
+  "description": "[OC] Project 7 : Les petits plats",
+  "main": "index.js",
+  "scripts": {
+    "sass": "sass --watch ./sass/main.scss:css/style.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jerome-foulet/FouletJerome_7_29042022.git"
+  },
+  "keywords": [
+    "OC",
+    "P7",
+    "plats"
+  ],
+  "author": "Jérôme FOULET",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jerome-foulet/FouletJerome_7_29042022/issues"
+  },
+  "homepage": "https://github.com/jerome-foulet/FouletJerome_7_29042022#readme"
+}
