@@ -1,15 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="Jérôme FOULET">
-    <meta name="description" content="Les petits plats">
-    <title>Les petits plats</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Jérôme FOULET">
+  <meta name="description" content="Les petits plats">
+  <title>Les petits plats</title>
+  <link rel="icon" type="image/png" href="images/logo.png" />
 
-    <link rel="stylesheet" href="css/style.css">
+  <!-- FontAwesome -->
+  <script src="https://kit.fontawesome.com/23fccb6679.js" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    
+
+  <!-- Header with search functionnalities -->
+  <header>
+
+    <img src="images/logo.png" alt="Logo" />
+    <h1>Les petits plats</h1>
+
+    <div id="searchSection">
+
+      <!-- Search by words in recipes -->
+      <div id="searchRecipeContainer">
+        <input id="searchRecipeInput" type="text" placeholder="Rechercher une recette">
+        <label class="visuallyHidden" for="searchRecipeInput">Rechercher une recette</label>
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </div>
+
+      <!-- Tags list -->
+      <ul id="tagsList">
+        <li class="tag bg-ingredients">
+          <p>Coco</p>
+          <i class="fa-regular fa-circle-xmark text-light"></i>
+        </li>
+        <li class="tag bg-appliance">
+          <p>CocoCocoCocoCocoCocoCocoCocoCocoCocoCoco</p>
+          <i class="fa-regular fa-circle-xmark text-light"></i>
+        </li>
+      </ul>
+
+      <!-- Search by keyword in ingredients, appliance or ustensils -->
+      <ul id="searchByKeywords">
+        <!-- ingredient -->
+        <li id="searchByKeywordsInIngredient">
+          <input id="searchIngredientInput" class="bg-ingredients" type="text" placeholder="Recherche un ingrédient">
+          <label class="visuallyHidden" for="searchIngredientInput">Rechercher un ingrédient</label>
+          <i class="fa-solid fa-chevron-down"></i>
+          <!-- Put ul as relative with padding top size of input and input as absolute
+          <ul class="bg-ingredients">
+            <li>element 1</li>
+            <li>element 2</li>
+            <li>element 2</li>
+          </ul>
+          -->
+        </li>
+        <!-- appliance -->
+        <li id="searchByKeywordsInAppliance">
+          <input id="searchApplianceInput" class="bg-appliances" type="text" value="Appareils">
+          <label class="visuallyHidden" for="searchApplianceInput">Rechercher un appareil</label>
+          <i class="fa-solid fa-chevron-down"></i>
+        </li>
+        <!-- ustensil -->
+        <li id="searchByKeywordsInUstensil">
+          <input id="searchUstensilInput" class="bg-ustensils" type="text" placeholder="Recherche un ustensile">
+          <label class="visuallyHidden" for="searchUstensilInput">Rechercher un ustensile</label>
+          <i class="fa-solid fa-chevron-down"></i>
+        </li>
+      </ul>
+    </div>
+
+  </header>
+
+  <!-- Main with cards -->
+  <main id="cards">
+
+    <article class="card">
+      <header>
+        <img src="..." alt="Image">
+      </header>
+      <main>
+        
+      </main>
+    </article>
+
+  </main>
+  
 </body>
 </html>

@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@700&family=Lato:wght@400;700&display=swap");
 *,
 *:after,
 *:before {
@@ -343,6 +344,158 @@ template {
  */
 [hidden] {
   display: none;
+}
+
+body {
+  font-family: "Lato", sans-serif;
+  margin: 0 auto;
+  width: 1240px;
+  --background-color-ingredients: #3282F7;
+  --background-color-appliances: #68D9A4;
+  --background-color-ustensils: #ED6454;
+}
+
+.bg-ingredients {
+  background-color: var(--background-color-ingredients);
+}
+
+.bg-appliances {
+  background-color: var(--background-color-appliances);
+}
+
+.bg-ustensils {
+  background-color: var(--background-color-ustensils);
+}
+
+header {
+  text-align: center;
+}
+header img {
+  margin-top: 42px;
+}
+header h1 {
+  font-family: "DM Sans", sans-serif;
+  color: #D04F4F;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 47px;
+  margin: 0;
+}
+header #searchSection {
+  margin-top: 17px;
+}
+header #searchSection #searchRecipeContainer {
+  position: relative;
+}
+header #searchSection #searchRecipeContainer i {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 17px;
+  font-size: 35px;
+}
+header #searchSection #searchRecipeContainer #searchRecipeInput {
+  width: 100%;
+  height: 70px;
+  border-radius: 5px;
+  border: none;
+  background-color: #E7E7E7;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  color: black;
+  padding-left: 24px;
+  padding-right: 70px;
+}
+header #searchSection #searchRecipeContainer #searchRecipeInput::placeholder {
+  opacity: 0.5;
+}
+header #searchSection #searchRecipeContainer #searchRecipeInput:focus, header #searchSection #searchRecipeContainer #searchRecipeInput:focus-visible, header #searchSection #searchRecipeContainer #searchRecipeInput:hover {
+  border: none;
+  outline: 0;
+}
+header #searchSection #tagsList {
+  margin: 0;
+  padding: 0;
+  margin-top: 25px;
+  display: flex;
+  gap: 20px;
+}
+header #searchSection #tagsList .tag {
+  color: white;
+  height: 37px;
+  padding: 0 20px;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 17px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space;
+  align-items: center;
+  width: max-content;
+  gap: 13px;
+}
+header #searchSection #searchByKeywords {
+  margin: 0;
+  padding: 0;
+  margin-top: 15px;
+  display: flex;
+  gap: 20px;
+}
+header #searchSection #searchByKeywords li {
+  position: relative;
+  display: flex;
+  min-width: 170px;
+  width: max-content;
+}
+header #searchSection #searchByKeywords li input {
+  height: 70px;
+  border: none;
+  border-radius: 5px;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  color: white;
+  padding: 0 19px;
+  padding-right: 69px;
+  width: 170px;
+}
+header #searchSection #searchByKeywords li input::placeholder {
+  color: white;
+  opacity: 0.5;
+}
+header #searchSection #searchByKeywords li input:focus, header #searchSection #searchByKeywords li input:focus-visible, header #searchSection #searchByKeywords li input:hover {
+  border: none;
+  outline: 0;
+  width: 100%;
+}
+header #searchSection #searchByKeywords li i {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 17px;
+  font-size: 15px;
+  color: white;
+}
+header #searchSection #searchByKeywords li ul {
+  position: absolute;
+  top: 70px;
+  left: 0;
+  width: 100%;
+  display: flex;
+}
+
+#cadrs {
+  margin-top: 54px;
+}
+
+.visuallyHidden {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -1,3 +1,178 @@
 @use 'box-sizing';
 @use 'normalize';
 
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@700&family=Lato:wght@400;700&display=swap');
+
+body {
+  font-family: "Lato", sans-serif;
+  margin: 0 auto;
+  width: 1240px;
+  --background-color-ingredients: #3282F7;
+  --background-color-appliances: #68D9A4;
+  --background-color-ustensils: #ED6454;
+}
+
+.bg-ingredients {
+  background-color: var(--background-color-ingredients);
+}
+
+.bg-appliances {
+  background-color: var(--background-color-appliances);
+}
+
+.bg-ustensils {
+  background-color: var(--background-color-ustensils);
+}
+
+header {
+  text-align: center;
+
+  img {
+    margin-top: 42px;
+  }
+
+  h1 {
+    font-family: "DM Sans", sans-serif;
+    color: #D04F4F;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 47px;
+    margin: 0;
+  }
+
+  #searchSection {
+    margin-top: 17px;
+
+    #searchRecipeContainer {
+      position: relative;
+
+      i {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 17px;
+        font-size: 35px;
+      }
+
+      #searchRecipeInput {
+        width: 100%;
+        height: 70px;
+        border-radius: 5px;
+        border: none;
+        background-color: #E7E7E7;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 22px;
+        color: black;
+        padding-left: 24px;
+        padding-right: 70px;
+    
+        &::placeholder {
+          opacity: 0.5;
+        }
+    
+        &:focus,
+        &:focus-visible,
+        &:hover {
+          border: none;
+          outline: 0;
+        }
+      }
+    }
+
+    #tagsList {
+      margin: 0;
+      padding: 0;
+      margin-top: 25px;
+      display: flex;
+      gap: 20px;
+
+      .tag {
+        color: white;
+        height: 37px;
+        padding: 0 20px;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 17px;
+        border-radius: 5px;
+        
+        display: flex;
+        justify-content: space;
+        align-items: center;
+        width: max-content;
+        gap: 13px;
+      }
+    }
+
+    #searchByKeywords {
+      margin: 0;
+      padding: 0;
+      margin-top: 15px;
+      display: flex;
+      gap: 20px;
+
+      li {
+        position: relative;
+        display: flex;
+        min-width: 170px;
+        width: max-content;
+
+        input {
+          height: 70px;
+          border: none;
+          border-radius: 5px;
+          font-weight: 700;
+          font-size: 18px;
+          line-height: 22px;
+          color: white;
+          padding: 0 19px;
+          padding-right: 69px;
+          width: 170px;
+
+          &::placeholder {
+            color: white;
+            opacity: 0.5;
+          }
+
+          &:focus,
+          &:focus-visible,
+          &:hover {
+            border: none;
+            outline: 0;
+            width: 100%;
+          }
+        }
+
+        i {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          right: 17px;
+          font-size: 15px;
+          color: white;
+        }
+
+        ul {
+          position: absolute;
+          top: 70px;
+          left: 0;
+          width: 100%;
+          display: flex;
+        }
+      }
+    }
+  }
+}
+
+#cadrs {
+  margin-top: 54px;
+}
+
+.visuallyHidden {
+  position:absolute;
+  left:-10000px;
+  top:auto;
+  width:1px;
+  height:1px;
+  overflow:hidden;
+}
