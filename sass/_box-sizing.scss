@@ -1,0 +1,7 @@
+*,
+*:after,
+*:before {
+    -webkit-box-sizing: border-box; // Safari <= 5
+    -moz-box-sizing: border-box; // Firefox <= 19
+    box-sizing: border-box;
+}
