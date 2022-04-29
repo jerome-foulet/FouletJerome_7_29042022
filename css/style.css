@@ -485,8 +485,68 @@ header #searchSection #searchByKeywords li ul {
   display: flex;
 }
 
-#cadrs {
+#cards {
   margin-top: 54px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
+}
+#cards .card {
+  width: 380px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+#cards .card header {
+  height: 178px;
+  background-color: #C7BEBE;
+}
+#cards .card section {
+  background-color: #E7E7E7;
+  height: 186px;
+  padding: 20px;
+}
+#cards .card section div:first-child {
+  display: flex;
+  align-items: center;
+}
+#cards .card section div:first-child h2 {
+  margin: 0;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+}
+#cards .card section div:first-child i {
+  margin-left: auto;
+}
+#cards .card section div:first-child p {
+  font-weight: 700;
+  margin: 0;
+  margin-left: 7px;
+}
+#cards .card section .recette {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+#cards .card section .recette ul {
+  margin: 0;
+  padding: 0;
+  width: 171px;
+  list-style-type: none;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+}
+#cards .card section .recette ul span {
+  font-weight: 700;
+}
+#cards .card section .recette p {
+  width: 171px;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 .visuallyHidden {

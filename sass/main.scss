@@ -164,8 +164,79 @@ header {
   }
 }
 
-#cadrs {
+#cards {
   margin-top: 54px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
+
+  .card {
+    width: 380px;
+    border-radius: 5px;
+    overflow: hidden;
+
+    header {
+      height: 178px;
+      background-color: #C7BEBE;
+    }
+
+    section {
+      background-color: #E7E7E7;
+      height: 186px;
+      padding: 20px;
+
+      div:first-child {
+        display: flex;
+        align-items: center;
+
+        h2 {
+          margin: 0;
+          font-weight: 400;
+          font-size: 18px;
+          line-height: 22px;
+        }
+
+        i {
+          margin-left: auto;
+        }
+
+        p {
+          font-weight: 700;
+          margin: 0;
+          margin-left: 7px;
+        }
+      }
+
+      .recette {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+
+        ul {
+          margin: 0;
+          padding: 0;
+          width: 171px;
+          list-style-type: none;
+          font-weight: 400;
+          font-size: 12px;
+          line-height: 14px;
+
+          span {
+            font-weight: 700;
+          }
+        }
+
+        p {
+          width: 171px;
+          font-weight: 400;
+          font-size: 12px;
+          line-height: 100%;
+          margin: 0;
+          padding: 0;
+        }
+      }
+    }
+  }
 }
 
 .visuallyHidden {
