@@ -353,6 +353,7 @@ body {
   --background-color-ingredients: #3282F7;
   --background-color-appliances: #68D9A4;
   --background-color-ustensils: #ED6454;
+  position: relative;
 }
 
 .bg-ingredients {
@@ -505,10 +506,13 @@ header #searchSection #searchByKeywords li ul li {
 }
 
 #cards {
+  position: absolute;
+  top: 390px;
   margin-top: 54px;
   display: flex;
   flex-wrap: wrap;
   gap: 50px;
+  z-index: -1;
 }
 #cards .card {
   width: 380px;
