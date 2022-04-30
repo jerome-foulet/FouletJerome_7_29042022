@@ -430,10 +430,12 @@ header #searchSection #tagsList .tag {
   line-height: 17px;
   border-radius: 5px;
   display: flex;
-  justify-content: space;
   align-items: center;
   width: max-content;
   gap: 13px;
+}
+header #searchSection #tagsList .tag i {
+  font-size: 20px;
 }
 header #searchSection #searchByKeywords {
   margin: 0;
@@ -441,14 +443,18 @@ header #searchSection #searchByKeywords {
   margin-top: 15px;
   display: flex;
   gap: 20px;
+  list-style-type: none;
 }
 header #searchSection #searchByKeywords li {
-  position: relative;
-  display: flex;
-  min-width: 170px;
-  width: max-content;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 5px;
 }
-header #searchSection #searchByKeywords li input {
+header #searchSection #searchByKeywords li div {
+  position: relative;
+  width: 100%;
+}
+header #searchSection #searchByKeywords li div input {
   height: 70px;
   border: none;
   border-radius: 5px;
@@ -457,19 +463,18 @@ header #searchSection #searchByKeywords li input {
   line-height: 22px;
   color: white;
   padding: 0 19px;
-  padding-right: 69px;
-  width: 170px;
+  padding-right: 40px;
+  width: 100%;
 }
-header #searchSection #searchByKeywords li input::placeholder {
+header #searchSection #searchByKeywords li div input::placeholder {
   color: white;
   opacity: 0.5;
 }
-header #searchSection #searchByKeywords li input:focus, header #searchSection #searchByKeywords li input:focus-visible, header #searchSection #searchByKeywords li input:hover {
+header #searchSection #searchByKeywords li div input:focus, header #searchSection #searchByKeywords li div input:focus-visible, header #searchSection #searchByKeywords li div input:hover {
   border: none;
   outline: 0;
-  width: 100%;
 }
-header #searchSection #searchByKeywords li i {
+header #searchSection #searchByKeywords li div i {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -478,11 +483,25 @@ header #searchSection #searchByKeywords li i {
   color: white;
 }
 header #searchSection #searchByKeywords li ul {
-  position: absolute;
-  top: 70px;
-  left: 0;
-  width: 100%;
+  margin: 0;
+  padding: 0;
   display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+  width: 100%;
+  max-width: 667px;
+  justify-content: flex-start;
+  padding-bottom: 16px;
+  padding-left: 20px;
+}
+header #searchSection #searchByKeywords li ul li {
+  width: 33%;
+  color: white;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: left;
+  padding-top: 10px;
 }
 
 #cards {
@@ -547,6 +566,10 @@ header #searchSection #searchByKeywords li ul {
   line-height: 100%;
   margin: 0;
   padding: 0;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 8;
+  -webkit-box-orient: vertical;
 }
 
 .visuallyHidden {

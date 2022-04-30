@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -36,7 +36,7 @@
           <p>Coco</p>
           <i class="fa-regular fa-circle-xmark text-light"></i>
         </li>
-        <li class="tag bg-appliance">
+        <li class="tag bg-appliances">
           <p>CocoCocoCocoCocoCocoCocoCocoCocoCocoCoco</p>
           <i class="fa-regular fa-circle-xmark text-light"></i>
         </li>
@@ -44,30 +44,66 @@
 
       <!-- Search by keyword in ingredients, appliance or ustensils -->
       <ul id="searchByKeywords">
-        <!-- ingredient -->
-        <li id="searchByKeywordsInIngredient">
-          <input id="searchIngredientInput" class="bg-ingredients" type="text" placeholder="Recherche un ingrédient">
-          <label class="visuallyHidden" for="searchIngredientInput">Rechercher un ingrédient</label>
-          <i class="fa-solid fa-chevron-down"></i>
-          <!-- Put ul as relative with padding top size of input and input as absolute
-          <ul class="bg-ingredients">
-            <li>element 1</li>
-            <li>element 2</li>
-            <li>element 2</li>
+
+        <!-- Ingredient -->
+        <li id="searchByKeywordsInIngredient" class="bg-ingredients">
+          <div>
+            <input id="searchIngredientInput" class="bg-ingredients" type="text" placeholder="Rechercher un ingrédient" size="10">
+            <label class="visuallyHidden" for="searchIngredientInput">Rechercher un ingrédient</label>
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+          <ul>
+            <li>Lait de coco</li>
+            <li>Lait de coco</li>
+            <li>Lait de coco</li>
+            <li>Lait de coco</li>
+            <li>Lait de coco</li>
+            <li>Lait de coco</li>
+            <li>Lait de coco</li>
+            <li>Lait de coco</li>
+            <li>Lait de coco</li>
+            <li>Lait de coco</li>
+            <li>Lait de coco</li>
+            <li>Lait de coco</li>
+            <li>Lait de coco</li>
+            <li>Lait de coco</li>
+            <li>Lait de coco</li>
+            <li>Lait de coco</li>
+            <li>Lait de coco</li>
+            <li>Lait de coco</li>
+            <li>Lait de coco</li>
+            <li>Lait de coco</li>
+            <li>Lait de coco</li>
+            <li>Lait de coco</li>
+            <li>Lait de coco</li>
+            <li>Lait de coco</li>
+            <li>Lait de coco</li>
+            <li>Lait de coco</li>
+            <li>Lait de coco</li>
+            <li>Lait de coco</li>
+            <li>Lait de coco</li>
+            <li>Lait de coco</li>
+            <li>Lait de coco</li>
+            <li>Lait de coco</li>
           </ul>
-          -->
         </li>
-        <!-- appliance -->
+
+        <!-- Appliance -->
         <li id="searchByKeywordsInAppliance">
-          <input id="searchApplianceInput" class="bg-appliances" type="text" value="Appareils">
-          <label class="visuallyHidden" for="searchApplianceInput">Rechercher un appareil</label>
-          <i class="fa-solid fa-chevron-down"></i>
+          <div>
+            <input id="searchApplianceInput" class="bg-appliances" type="text" value="Appareils" size="10">
+            <label class="visuallyHidden" for="searchApplianceInput">Rechercher un appareil</label>
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
         </li>
-        <!-- ustensil -->
+
+        <!-- Ustensil -->
         <li id="searchByKeywordsInUstensil">
-          <input id="searchUstensilInput" class="bg-ustensils" type="text" placeholder="Recherche un ustensile">
-          <label class="visuallyHidden" for="searchUstensilInput">Rechercher un ustensile</label>
-          <i class="fa-solid fa-chevron-down"></i>
+          <div>
+            <input id="searchUstensilInput" class="bg-ustensils" type="text" value="Ustensiles" size="10">
+            <label class="visuallyHidden" for="searchUstensilInput">Rechercher un ustensile</label>
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
         </li>
       </ul>
     </div>
@@ -77,7 +113,7 @@
   <!-- Main with cards -->
   <main id="cards">
 
-    <article class="card">
+    <div class="card">
       <header>
       </header>
       <section>
@@ -97,12 +133,14 @@
           </ul>
           <p>
             Mettre les glaçons à votre goût dans le blender, ajouter le lait, la crème de coco, le jus de 2 citrons et le sucre. Mixer jusqu'à avoir la consistence désirée
+            Mettre les glaçons à votre goût dans le blender, ajouter le lait, la crème de coco, le jus de 2 citrons et le sucre. Mixer jusqu'à avoir la consistence désirée
+            Mettre les glaçons à votre goût dans le blender, ajouter le lait, la crème de coco, le jus de 2 citrons et le sucre. Mixer jusqu'à avoir la consistence désirée
           </p>
         </div>
       </section>
-    </article>
+    </div>
 
-    <article class="card">
+    <div class="card">
       <header>
       </header>
       <section>
@@ -125,9 +163,9 @@
           </p>
         </div>
       </section>
-    </article>
+    </div>
 
-    <article class="card">
+    <div class="card">
       <header>
       </header>
       <section>
@@ -150,9 +188,9 @@
           </p>
         </div>
       </section>
-    </article>
+    </div>
 
-    <article class="card">
+    <div class="card">
       <header>
       </header>
       <section>
@@ -175,7 +213,32 @@
           </p>
         </div>
       </section>
-    </article>
+    </div>
+    
+    <div class="card">
+      <header>
+      </header>
+      <section>
+        <div>
+          <h2>Limionade de Coco</h2>
+          <i class="fa-regular fa-clock"></i>
+          <p>10 min</p>
+        </div>
+        <div class="recette">
+          <ul>
+            <li><span>Lait de coco</span>:400ml</li>
+            <li><span>Lait de coco</span>:400ml</li>
+            <li><span>Lait de coco</span>:400ml</li>
+            <li><span>Lait de coco</span>:400ml</li>
+            <li><span>Lait de coco</span>:400ml</li>
+            <li><span>Lait de coco</span></li>
+          </ul>
+          <p>
+            Mettre les glaçons à votre goût dans le blender, ajouter le lait, la crème de coco, le jus de 2 citrons et le sucre. Mixer jusqu'à avoir la consistence désirée
+          </p>
+        </div>
+      </section>
+    </div>
 
   </main>
   
