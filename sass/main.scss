@@ -137,7 +137,6 @@ header {
             padding: 0 19px;
             padding-right: 40px;
             width: 100%;
-            //width: 170px;
   
             &::placeholder {
               color: white;
@@ -165,25 +164,26 @@ header {
         ul {
           margin: 0;
           padding: 0;
-          display: flex;
-          flex-wrap: wrap;
-          list-style-type: none;
-          width: 100%;
+          // grid set on js on focus
+          //display: grid;
+          display: none;
+          // must adapt from js when there is 1, 2 or more data for 1, 2 or 3 column
+          grid-template-columns: repeat(1, 1fr);
+          gap: 10px 25px;
           max-width: 667px;
-          justify-content: flex-start;
+
+          list-style-type: none;
           padding-bottom: 16px;
           padding-left: 20px;
+          padding-right: 20px;
 
           li {
-            width: 33%;
-            //min-width: 212px;
-
             color: white;
             font-weight: 400;
             font-size: 18px;
             line-height: 22px;
             text-align: left;
-            padding-top: 10px;
+            width: 100%;
           }
         }
       }
@@ -199,6 +199,7 @@ header {
   flex-wrap: wrap;
   gap: 50px;
   z-index: -1;
+  padding-bottom: 20px;
 
   .card {
     width: 380px;
@@ -224,6 +225,7 @@ header {
           font-weight: 400;
           font-size: 18px;
           line-height: 22px;
+          max-width: 255px;
         }
 
         i {
@@ -268,6 +270,8 @@ header {
           display: -webkit-box;
           -webkit-line-clamp: 8;
           -webkit-box-orient: vertical;
+          text-overflow: ellipsis;
+          max-height: 8 * 12px;
         }
       }
     }

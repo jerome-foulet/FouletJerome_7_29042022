@@ -486,23 +486,22 @@ header #searchSection #searchByKeywords li div i {
 header #searchSection #searchByKeywords li ul {
   margin: 0;
   padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  list-style-type: none;
-  width: 100%;
+  display: none;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 10px 25px;
   max-width: 667px;
-  justify-content: flex-start;
+  list-style-type: none;
   padding-bottom: 16px;
   padding-left: 20px;
+  padding-right: 20px;
 }
 header #searchSection #searchByKeywords li ul li {
-  width: 33%;
   color: white;
   font-weight: 400;
   font-size: 18px;
   line-height: 22px;
   text-align: left;
-  padding-top: 10px;
+  width: 100%;
 }
 
 #cards {
@@ -513,6 +512,7 @@ header #searchSection #searchByKeywords li ul li {
   flex-wrap: wrap;
   gap: 50px;
   z-index: -1;
+  padding-bottom: 20px;
 }
 #cards .card {
   width: 380px;
@@ -537,6 +537,7 @@ header #searchSection #searchByKeywords li ul li {
   font-weight: 400;
   font-size: 18px;
   line-height: 22px;
+  max-width: 255px;
 }
 #cards .card section div:first-child i {
   margin-left: auto;
@@ -574,6 +575,8 @@ header #searchSection #searchByKeywords li ul li {
   display: -webkit-box;
   -webkit-line-clamp: 8;
   -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  max-height: 96px;
 }
 
 .visuallyHidden {

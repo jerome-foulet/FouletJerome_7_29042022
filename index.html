@@ -48,62 +48,43 @@
         <!-- Ingredient -->
         <li id="searchByKeywordsInIngredient" class="bg-ingredients">
           <div>
-            <input id="searchIngredientInput" class="bg-ingredients" type="text" placeholder="Rechercher un ingrédient" size="10">
+            <input id="searchIngredientInput" class="bg-ingredients" type="text" value="Ingredients" size="10">
             <label class="visuallyHidden" for="searchIngredientInput">Rechercher un ingrédient</label>
-            <i class="fa-solid fa-chevron-up"></i>
+            <i class="fa-solid fa-chevron-down"></i>
           </div>
-          <ul>
+          <ul id="ingredientsList">
             <li>Lait de coco</li>
-            <li>Lait de coco</li>
-            <li>Lait de coco</li>
-            <li>Lait de coco</li>
-            <li>Lait de coco</li>
-            <li>Lait de coco</li>
-            <li>Lait de coco</li>
-            <li>Lait de coco</li>
-            <li>Lait de coco</li>
-            <li>Lait de coco</li>
-            <li>Lait de coco</li>
-            <li>Lait de coco</li>
-            <li>Lait de coco</li>
-            <li>Lait de coco</li>
-            <li>Lait de coco</li>
-            <li>Lait de coco</li>
-            <li>Lait de coco</li>
-            <li>Lait de coco</li>
-            <li>Lait de coco</li>
-            <li>Lait de coco</li>
-            <li>Lait de coco</li>
-            <li>Lait de coco</li>
-            <li>Lait de coco</li>
-            <li>Lait de coco</li>
-            <li>Lait de coco</li>
-            <li>Lait de coco</li>
-            <li>Lait de coco</li>
-            <li>Lait de coco</li>
-            <li>Lait de coco</li>
-            <li>Lait de coco</li>
-            <li>Lait de coco</li>
-            <li>Lait de coco</li>
+            <li>Lait de chevre</li>
+            <li>Lait</li>
+            <li>Lait</li>
+            <li>Lait</li>
+            <li>Lait</li>
+            <li>Lait</li>
           </ul>
         </li>
 
         <!-- Appliance -->
-        <li id="searchByKeywordsInAppliance">
+        <li id="searchByKeywordsInAppliance" class="bg-appliances">
           <div>
             <input id="searchApplianceInput" class="bg-appliances" type="text" value="Appareils" size="10">
             <label class="visuallyHidden" for="searchApplianceInput">Rechercher un appareil</label>
             <i class="fa-solid fa-chevron-down"></i>
           </div>
+          <ul id="appliancesList">
+            <li>test</li>
+          </ul>
         </li>
 
         <!-- Ustensil -->
-        <li id="searchByKeywordsInUstensil">
+        <li id="searchByKeywordsInUstensil" class="bg-ustensils">
           <div>
             <input id="searchUstensilInput" class="bg-ustensils" type="text" value="Ustensiles" size="10">
             <label class="visuallyHidden" for="searchUstensilInput">Rechercher un ustensile</label>
             <i class="fa-solid fa-chevron-down"></i>
           </div>
+          <ul id="ustensilsList">
+            <li>Lait de coco</li>
+          </ul>
         </li>
       </ul>
     </div>
@@ -241,6 +222,9 @@
     </div>
 
   </main>
+
+  <!-- Entry point -->
+  <script type="module" src="scripts/main.js"></script>
   
 </body>
 </html>
