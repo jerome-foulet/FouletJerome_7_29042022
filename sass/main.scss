@@ -168,7 +168,7 @@ header {
           //display: grid;
           display: none;
           // must adapt from js when there is 1, 2 or more data for 1, 2 or 3 column
-          grid-template-columns: repeat(1, 1fr);
+          grid-template-columns: repeat(3, 1fr);
           gap: 10px 25px;
           max-width: 667px;
 
@@ -183,8 +183,14 @@ header {
             font-size: 18px;
             line-height: 22px;
             text-align: left;
-            width: 100%;
           }
+
+          /*
+          &:focus ~ li, li:focus,
+          &:hover ~ li, li:hover {
+            display: grid;
+          }
+          */
         }
       }
     }
