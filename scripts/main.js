@@ -18,7 +18,12 @@ let tags = {
   appliances : [],
   ustensils : []
 }
-let selectedTags = {
+let tagsFull = {
+  ingredients : [],
+  appliances : [],
+  ustensils : []
+}
+const selectedTags = {
   ingredients : [],
   appliances : [],
   ustensils : []
@@ -85,6 +90,7 @@ const updateTagList = () => {
     }
   }
   console.log(tags);
+  tagsFull = JSON.parse(JSON.stringify(tags))
   displayTagList ()
 }
 
@@ -192,14 +198,14 @@ const convertUnit = (unitToConvert) => {
   }
 }
 const displayTagList = () => {
-  for (var categorie in tags) {
+  for (var category in tags) {
     let selector
-    if (categorie === 'ingredients') selector = ingredientList
-    if (categorie === 'appliances') selector = appliancesList
-    if (categorie === 'ustensils') selector = ustensilsList
+    if (category === 'ingredients') selector = ingredientList
+    if (category === 'appliances') selector = appliancesList
+    if (category === 'ustensils') selector = ustensilsList
     selector.textContent = ''
-    for (let index = 0; index < tags[categorie].length; index++) {
-      const tag = tags[categorie][index];
+    for (let index = 0; index < tags[category].length; index++) {
+      const tag = tags[category][index];
       selector.appendChild(htmlToElement(`
         <li>${tag}</li>
       `)).addEventListener('mousedown', selectTag)
@@ -231,7 +237,6 @@ const selectTag = (e) => {
   selectedTags[category].push(tagValue)
   displaySelectedTags ()
 }
-
 const removeTag = (e) => {
   const tagValue = e.target.parentElement.querySelector('p').textContent
   const category = e.target.parentElement.classList.value.replace('tag bg-', '')
@@ -241,7 +246,17 @@ const removeTag = (e) => {
   // Add tag on list and update display
   tags[category].unshift(tagValue)
   displayTagList ()
-
+}
+const restrictTagListOnInput = (e, category) => {
+  //if (e.keyCode >= 65 && e.keyCode <= 90) {
+    // Get value and return only those who matches
+    const enteredValue = e.target.value
+    tags[category] = tags[category].filter(element => element.toLowerCase().includes(enteredValue.toLowerCase()))
+    console.log(tags, tagsFull);
+    displayTagList ()
+    tags[category] = JSON.parse(JSON.stringify(tagsFull[category]))
+    tags[category] = tags[category].filter(element => !selectedTags[category].includes(element))
+  //}
 }
 
 // Utilities functions
@@ -257,6 +272,15 @@ const htmlToElement = (html) => {
 
 // Global listeners
 searchInput.addEventListener('keyup', runPrimarySearch)
+searchIngredientInput.addEventListener('keyup', function(e) {
+  restrictTagListOnInput(e, 'ingredients')
+})
+searchApplianceInput.addEventListener('keyup', function(e) {
+  restrictTagListOnInput(e, 'appliances')
+})
+searchUstensilInput.addEventListener('keyup', function(e) {
+  restrictTagListOnInput(e, 'ustensils')
+})
 
 // Init function
 const init = () => {
