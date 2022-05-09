@@ -11,7 +11,9 @@ const ustensilsList = document.querySelector('#ustensilsList')
 const cardsList = document.querySelector('#cards')
 const tagsList = document.querySelector('#tagsList')
 
-// Global variables
+// Globals variables
+let sentenceRecipesArray = []
+let tagRecipesArray = []
 let recipesToDisplay = []
 let tags = {
   ingredients : [],
@@ -68,28 +70,35 @@ const toggleDisplayOfList = (listElement, input) => {
   }
 }
 const updateTagList = () => {
+  tags = {
+    ingredients : [],
+    appliances : [],
+    ustensils : []
+  }
   for (let index = 0; index < recipesToDisplay.length; index++) {
     const recipe = recipesToDisplay[index];
     // Ingredients
     for (let recipeIndex = 0; recipeIndex < recipe.ingredients.length; recipeIndex++) {
       const ingredient = recipe.ingredients[recipeIndex];
-      if (tags.ingredients.findIndex(item => ingredient.ingredient.toLowerCase() === item.toLowerCase()) === -1) {
+      if (tags.ingredients.findIndex(item => ingredient.ingredient.toLowerCase() === item.toLowerCase()) === -1
+        && selectedTags.ingredients.findIndex(item => ingredient.ingredient.toLowerCase() === item.toLowerCase()) === -1) {
         tags.ingredients.push(ucFirst(ingredient.ingredient))
       }
     }
     // Appliance
-    if (tags.appliances.findIndex(item => recipe.appliance.toLowerCase() === item.toLowerCase()) === -1) {
+    if (tags.appliances.findIndex(item => recipe.appliance.toLowerCase() === item.toLowerCase()) === -1
+      && selectedTags.appliances.findIndex(item => recipe.appliance.toLowerCase() === item.toLowerCase()) === -1) {
       tags.appliances.push(ucFirst(recipe.appliance))
     }
     // Ustensiles
     for (let index = 0; index < recipe.ustensils.length; index++) {
       const ustensil = recipe.ustensils[index];
-      if (tags.ustensils.findIndex(item => ustensil.toLowerCase() === item.toLowerCase()) === -1) {
+      if (tags.ustensils.findIndex(item => ustensil.toLowerCase() === item.toLowerCase()) === -1
+        && selectedTags.ustensils.findIndex(item => ustensil.toLowerCase() === item.toLowerCase()) === -1) {
         tags.ustensils.push(ucFirst(ustensil))
       }
     }
   }
-  console.log(tags);
   tagsFull = JSON.parse(JSON.stringify(tags))
   displayTagList ()
 }
@@ -97,37 +106,74 @@ const updateTagList = () => {
 // Search functions
 const runPrimarySearch = (e) => {
   if (searchInput.value.length < 3) {
-    if (recipesToDisplay.length !== recipes.length) {
-      recipesToDisplay = recipes
+    if (sentenceRecipesArray.length !== recipes.length) {
+      sentenceRecipesArray = recipes
       displayRecipes ()
     }
     return
   }
-  recipesToDisplay = searchSentenceInRecipesArray(searchInput.value, recipes)
+  searchSentenceInRecipesArray(searchInput.value)
   displayRecipes ()
 }
-const searchSentenceInRecipesArray = (inputToSearch, recipesArray) => {
+const searchSentenceInRecipesArray = (inputToSearch) => {
   let matchedRecipes = []
-  for (let index = 0; index < recipesArray.length; index++) {
-    const recipe = recipesArray[index];
+  for (let recipesIndex = 0; recipesIndex < recipes.length; recipesIndex++) {
+    const recipe = recipes[recipesIndex];
     let ingredients = ''
-    for (let index2 = 0; index2 < recipe.ingredients.length; index2++) {
-      const ingredient = recipe.ingredients[index2];
+    for (let ingredientIndex = 0; ingredientIndex < recipe.ingredients.length; ingredientIndex++) {
+      const ingredient = recipe.ingredients[ingredientIndex];
       // Space to avoid fusion of 2 ingredients
       ingredients += ` ${ingredient.ingredient}`
     }
     // Space to avoid fusion of our 3 use case
-    const sentenceToSearchIn = `${recipe.title} ${recipe.description} ${ingredients}`
+    const sentenceToSearchIn = `${recipe.name} ${recipe.description} ${ingredients}`
     if (sentenceToSearchIn.toLowerCase().includes(inputToSearch.toLowerCase())) {
       matchedRecipes.push(recipe)
     }
   }
-  return matchedRecipes
+  sentenceRecipesArray = matchedRecipes
+}
+const runTagSearch = (e) => {
+  // Check if selectedTags empty to reset tagRecipesArray = recipes and skip search
+  if (isTagArrayEmpty (selectedTags)) {
+    tagRecipesArray = recipes
+    displayRecipes ()
+    return
+  }
+  searchSelectedTagsInRecipesArray ()
+  displayRecipes ()
+}
+const searchSelectedTagsInRecipesArray = () => {
+  let matchedRecipes = []
+  tagRecipesArray = []
+  for (let recipeIndex = 0; recipeIndex < recipes.length; recipeIndex++) {
+    const recipe = recipes[recipeIndex];
+    for (var category in selectedTags) {
+      for (let tagIndex = 0; tagIndex < selectedTags[category].length; tagIndex++) {
+        const tag = selectedTags[category][tagIndex];
+        if (category === 'ingredients') {
+          for (let ingredientIndex = 0; ingredientIndex < recipe.ingredients.length; ingredientIndex++) {
+            const ingredient = recipe.ingredients[ingredientIndex];
+            if (ucFirst(ingredient.ingredient) === tag) matchedRecipes.push(recipe)
+          }
+        }
+        if (category === 'ustensils') {
+          for (let ustensilIndex = 0; ustensilIndex < recipe.ustensils.length; ustensilIndex++) {
+            const ustensil = recipe.ustensils[ustensilIndex];
+            if (ucFirst(ustensil) === tag) matchedRecipes.push(recipe)
+          }
+        }
+        if (category === 'appliances' && recipe.appliance === tag) matchedRecipes.push(recipe)
+      }
+    }
+  }  
+  tagRecipesArray = matchedRecipes
 }
 
-// Display function
+// Display functions
 const displayRecipes = () => {
-  //console.log(recipesToDisplay);
+  mergeRecipesArrayToDisplay ()
+  updateTagList ()
   cardsList.textContent = ''
   if (recipesToDisplay.length === 0) {
     cardsList.appendChild(htmlToElement(`
@@ -227,15 +273,46 @@ const displaySelectedTags = () => {
   }
 }
 
+// Utilities functions
+const isTagArrayEmpty = (tagArray) => {
+  if (tagArray['ingredients'].length === 0 
+    && tagArray['appliances'].length === 0
+    && tagArray['ustensils'].length === 0
+  ) return true
+  else {
+    return false
+  }
+}
+const mergeRecipesArrayToDisplay = () => {
+  recipesToDisplay = []
+  if (tagRecipesArray.length === 0 && sentenceRecipesArray.length === 0) {
+    if (searchInput.value.length < 3) recipesToDisplay = recipes
+    return
+  } else if (sentenceRecipesArray.length === 0) {
+    recipesToDisplay = tagRecipesArray
+    return
+  } else if (tagRecipesArray.length === 0) {
+    recipesToDisplay = sentenceRecipesArray
+    return
+  }
+  for (let sentenceIndex = 0; sentenceIndex < sentenceRecipesArray.length; sentenceIndex++) {
+    const sentenceRecipe = sentenceRecipesArray[sentenceIndex];
+    for (let tagIndex = 0; tagIndex < tagRecipesArray.length; tagIndex++) {
+      const tagRecipe = tagRecipesArray[tagIndex];
+      if (sentenceRecipe.id === tagRecipe.id) recipesToDisplay.push(tagRecipe)
+    }
+  }
+}
 const selectTag = (e) => {
   const category = e.target.parentElement.id.replace("List", '')
   const tagValue = e.target.textContent
   // Remove tag from list and update display
   tags[category].splice(tags[category].indexOf(tagValue), 1)
   displayTagList ()
-  // Add tag ton selectedTags and display selectedTags
+  // Add tag on selectedTags and display selectedTags
   selectedTags[category].push(tagValue)
   displaySelectedTags ()
+  runTagSearch ()
 }
 const removeTag = (e) => {
   const tagValue = e.target.parentElement.querySelector('p').textContent
@@ -243,9 +320,10 @@ const removeTag = (e) => {
   // Remove tag from selected and update display
   selectedTags[category].splice(selectedTags[category].indexOf(tagValue), 1)
   displaySelectedTags ()
-  // Add tag on list and update display
+  // Add tag on list and update display - Reset on top if missclick
   tags[category].unshift(tagValue)
   displayTagList ()
+  runTagSearch ()
 }
 const restrictTagListOnInput = (e, category) => {
   //if (e.keyCode >= 65 && e.keyCode <= 90) {
@@ -258,8 +336,6 @@ const restrictTagListOnInput = (e, category) => {
     tags[category] = tags[category].filter(element => !selectedTags[category].includes(element))
   //}
 }
-
-// Utilities functions
 const ucFirst = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
