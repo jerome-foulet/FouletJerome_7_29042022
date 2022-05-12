@@ -1,4 +1,5 @@
 import { recipes } from '../data/recipes.js'
+import { searchSentenceInRecipesArray } from './sentenceSearch.js'
 
 // Globals selectors
 const searchInput = document.querySelector('#searchRecipeInput')
@@ -20,16 +21,8 @@ let tags = {
   appliances : [],
   ustensils : []
 }
-let tagsFull = {
-  ingredients : [],
-  appliances : [],
-  ustensils : []
-}
-const selectedTags = {
-  ingredients : [],
-  appliances : [],
-  ustensils : []
-}
+let tagsFull = JSON.parse(JSON.stringify(tags))
+let selectedTags = JSON.parse(JSON.stringify(tags))
 
 // Handle display of list of tags on focus and blur
 searchIngredientInput.addEventListener('focus', (e) => {
@@ -104,7 +97,7 @@ const updateTagList = () => {
 }
 
 // Search functions
-const runPrimarySearch = (e) => {
+const runSentenceSearch = (e) => {
   if (searchInput.value.length < 3) {
     if (sentenceRecipesArray.length !== recipes.length) {
       sentenceRecipesArray = recipes
@@ -112,26 +105,8 @@ const runPrimarySearch = (e) => {
     }
     return
   }
-  searchSentenceInRecipesArray(searchInput.value)
+  sentenceRecipesArray = searchSentenceInRecipesArray(searchInput.value, recipes)
   displayRecipes ()
-}
-const searchSentenceInRecipesArray = (inputToSearch) => {
-  let matchedRecipes = []
-  for (let recipesIndex = 0; recipesIndex < recipes.length; recipesIndex++) {
-    const recipe = recipes[recipesIndex];
-    let ingredients = ''
-    for (let ingredientIndex = 0; ingredientIndex < recipe.ingredients.length; ingredientIndex++) {
-      const ingredient = recipe.ingredients[ingredientIndex];
-      // Space to avoid fusion of 2 ingredients
-      ingredients += ` ${ingredient.ingredient}`
-    }
-    // Space to avoid fusion of our 3 use case
-    const sentenceToSearchIn = `${recipe.name} ${recipe.description} ${ingredients}`
-    if (sentenceToSearchIn.toLowerCase().includes(inputToSearch.toLowerCase())) {
-      matchedRecipes.push(recipe)
-    }
-  }
-  sentenceRecipesArray = matchedRecipes
 }
 const runTagSearch = (e) => {
   // Check if selectedTags empty to reset tagRecipesArray = recipes and skip search
@@ -144,29 +119,32 @@ const runTagSearch = (e) => {
   displayRecipes ()
 }
 const searchSelectedTagsInRecipesArray = () => {
-  let matchedRecipes = []
   tagRecipesArray = []
-  for (let recipeIndex = 0; recipeIndex < recipes.length; recipeIndex++) {
-    const recipe = recipes[recipeIndex];
-    for (var category in selectedTags) {
-      for (let tagIndex = 0; tagIndex < selectedTags[category].length; tagIndex++) {
-        const tag = selectedTags[category][tagIndex];
-        if (category === 'ingredients') {
-          for (let ingredientIndex = 0; ingredientIndex < recipe.ingredients.length; ingredientIndex++) {
-            const ingredient = recipe.ingredients[ingredientIndex];
-            if (ucFirst(ingredient.ingredient) === tag) matchedRecipes.push(recipe)
-          }
-        }
-        if (category === 'ustensils') {
-          for (let ustensilIndex = 0; ustensilIndex < recipe.ustensils.length; ustensilIndex++) {
-            const ustensil = recipe.ustensils[ustensilIndex];
-            if (ucFirst(ustensil) === tag) matchedRecipes.push(recipe)
-          }
-        }
-        if (category === 'appliances' && recipe.appliance === tag) matchedRecipes.push(recipe)
-      }
-    }
-  }  
+  let matchedRecipes = recipes.filter((recipe) => {
+    // Ingredients
+    let recipesIngredientsArray = recipe.ingredients.map((ingredient) => {
+      return ingredient.ingredient.toLowerCase()
+    })
+    // If all selectedTags ingredients are not in recipesIngredients, skip current recipe
+    if (!selectedTags.ingredients.every(element => recipesIngredientsArray.indexOf(element.toLowerCase()) > -1)) 
+      return false
+
+    // Ustensils
+    let recipesUstensilsArray = recipe.ustensils.map((ustensil) => {
+      return ustensil.toLowerCase()
+    })
+    // If all selectedTags ustensils are not in recipesUstensilsArray, skip current recipe
+    if (!selectedTags.ustensils.every(element => recipesUstensilsArray.indexOf(element.toLowerCase()) > -1)) 
+      return false
+
+    // Appliance
+    // If all selectedTags appliances are not equal to recipe appliance, skip current recipe
+    if (!selectedTags.appliances.every(element => recipe.appliance.toLowerCase() === element.toLowerCase()))
+      return false
+
+    // If all conditions are ok then return recipe
+    return true
+  })
   tagRecipesArray = matchedRecipes
 }
 
@@ -182,6 +160,7 @@ const displayRecipes = () => {
     `))
     return
   }
+  console.log(recipesToDisplay);
   for (let index = 0; index < recipesToDisplay.length; index++) {
     const recipe = recipesToDisplay[index];
     // Create DOM element
@@ -286,7 +265,7 @@ const isTagArrayEmpty = (tagArray) => {
 const mergeRecipesArrayToDisplay = () => {
   recipesToDisplay = []
   if (tagRecipesArray.length === 0 && sentenceRecipesArray.length === 0) {
-    if (searchInput.value.length < 3) recipesToDisplay = recipes
+    if (searchInput.value.length < 3 && isTagArrayEmpty(selectedTags)) recipesToDisplay = recipes
     return
   } else if (sentenceRecipesArray.length === 0) {
     recipesToDisplay = tagRecipesArray
@@ -320,17 +299,17 @@ const removeTag = (e) => {
   // Remove tag from selected and update display
   selectedTags[category].splice(selectedTags[category].indexOf(tagValue), 1)
   displaySelectedTags ()
-  // Add tag on list and update display - Reset on top if missclick
-  tags[category].unshift(tagValue)
+  // Add tag on list and update display
+  tags[category].push(tagValue)
   displayTagList ()
   runTagSearch ()
 }
 const restrictTagListOnInput = (e, category) => {
+  // Range of chars a-z
   //if (e.keyCode >= 65 && e.keyCode <= 90) {
     // Get value and return only those who matches
     const enteredValue = e.target.value
     tags[category] = tags[category].filter(element => element.toLowerCase().includes(enteredValue.toLowerCase()))
-    console.log(tags, tagsFull);
     displayTagList ()
     tags[category] = JSON.parse(JSON.stringify(tagsFull[category]))
     tags[category] = tags[category].filter(element => !selectedTags[category].includes(element))
@@ -347,7 +326,7 @@ const htmlToElement = (html) => {
 }
 
 // Global listeners
-searchInput.addEventListener('keyup', runPrimarySearch)
+searchInput.addEventListener('keyup', runSentenceSearch)
 searchIngredientInput.addEventListener('keyup', function(e) {
   restrictTagListOnInput(e, 'ingredients')
 })
@@ -363,8 +342,6 @@ const init = () => {
   // Display all recipes
   recipesToDisplay = recipes
   displayRecipes ()
-  // Get all tags
-  updateTagList ()
 }
 
 init ()
