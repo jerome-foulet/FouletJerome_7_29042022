@@ -267,10 +267,10 @@ const mergeRecipesArrayToDisplay = () => {
   if (tagRecipesArray.length === 0 && sentenceRecipesArray.length === 0) {
     if (searchInput.value.length < 3 && isTagArrayEmpty(selectedTags)) recipesToDisplay = recipes
     return
-  } else if (sentenceRecipesArray.length === 0) {
+  } else if (sentenceRecipesArray.length === 0 && searchInput.value.length < 3) {
     recipesToDisplay = tagRecipesArray
     return
-  } else if (tagRecipesArray.length === 0) {
+  } else if (tagRecipesArray.length === 0 && isTagArrayEmpty(selectedTags)) {
     recipesToDisplay = sentenceRecipesArray
     return
   }
